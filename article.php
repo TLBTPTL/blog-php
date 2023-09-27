@@ -6,6 +6,10 @@
     <title>Article - Blog</title>
 </head>
 <body>
-    
+    <div id="Post">
+        <?php
+            $_Article;
+        ?>
+    </div>
 </body>
 </html>
