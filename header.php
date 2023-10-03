@@ -2,7 +2,7 @@
 <html>
 <head>
     <!-- Ouais le css en html évite de faire des fichiers en plus -->
-    <title>Jeu du Pendu - Jérémy Girard</title>
+    <title>Blogophilie - Jérémy Girard</title>
     <style>
         body {
             text-align: center;
@@ -49,11 +49,12 @@
 </head>
 <body>
     <header>
-        <h1>Blog</h1>
+        <h1>Blogophilie</h1>
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="connexion.php">Connexion</a></li>
+                <li><a href="creationarticle.php">Créer Article</a></li>
                 <li><a href="apropos.php">À propos</a></li>
             </ul>
         </nav>

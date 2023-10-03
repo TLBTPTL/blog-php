@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste Article - Blog</title>
 </head>
-<body> 
-    <?php
+
+<?php
         include_once('header.php');
     ?>
+<body> 
     
-    
+        
+
 
     <?php
         include_once("footer.php");
