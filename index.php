@@ -1,3 +1,7 @@
+<?php
+    include_once 'header.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,6 @@
     <title>Liste Article - Blog</title>
 </head>
 <body>  
-    
+    <h1>Bienvenue sur Blogos</h1>
 </body>
 </html>
