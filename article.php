@@ -6,10 +6,7 @@
     <title>Article - Blog</title>
 </head>
 <body>
-    <div id="Post">
-        <?php
-            $_Article;
-        ?>
-    </div>
+    <div id="Article"> <?php $_Article; ?> </div>
+    <div id="Commentaire"> <?php $_Commentaire?> </div>
 </body>
 </html>
