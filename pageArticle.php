@@ -11,10 +11,31 @@
     <title>Page Article - Blog</title>
 </head>
 <body>
-    <div id="Article"> 
-        <?php 
-            $Article = $_SESSION[''];
-        ?> 
+    <?php 
+        $stmt = $dbh->prepare("SELECT * FROM article WHERE idArticle = ?");
+        $stmt->execute($_GET['idArticle']);
+        foreach ($stmt as $row){
+            print_r($row);
+        }
+    ?> 
+    <div id="Article">
+        <div id="headArticle">
+            <div id="titreArticle">
+                <?php 
+                    echo($titreArticle);
+                ?>
+            </div>
+            <div id="categorieArticle">
+                <?php
+                    echo($categorieArticle);
+                ?>
+            </div>
+            <div id="pseudoArticle">
+                <?php
+                    echo($pseudoArticle);
+                ?>
+            </div>
+        </div>
     </div>
     <div id="Commentaire"> <?php $_Commentaire?> </div>
 </body>
