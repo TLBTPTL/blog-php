@@ -12,8 +12,9 @@
     <div class="box">
     <h1>Formulaire Connexion</h1>
 
-        <input type="email" name="email" placeholder="Email" onFocus="field_focus(this, '');" onblur="field_blur(this, '');" class="email" />
-        <input type="password" name="password" placeholder="Mot De Passe" onFocus="field_focus(this, '');" onblur="field_blur(this, 'email');" class="email" />
+        <input type="email" name="email" placeholder="Email"  class="email" />
+        <input type="pseudo" name="pseudo" placeholder="Pseudo"  class="email" />
+        <input type="password" name="password" placeholder="Mot De Passe"   class="email" />
     
     <a href="index.html"><div class="btn"><button type="submit">Se connecter</button></a></div>
     
