@@ -1,4 +1,4 @@
 <?php
     include 'functionDataBase.php';
-    $connexion = connectToDatabase();
+    session_start();
 ?>

@@ -1,5 +1,6 @@
 <?php
     include_once 'header.php';
+    $connexion = connectToDatabase();
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +11,14 @@
     <title>Liste Article - Blog</title>
 </head>
 <body>  
-    <h1>Bienvenue sur Blogos</h1>
+    <h1>Bienvenue sur Le Blog d'Irene</h1>
+    <?php
+    $sql =  'SELECT titreArticle, descriptionArticle, idArticle FROM article WHERE idArticle = 1';
+    foreach  ($connexion->query($sql) as $row) {
+        print 'L\'article numero '. $row['idArticle'] . "\t";
+        print 'est intitulé ' . $row['titreArticle'] . "\t";
+        print 'est contient ' . $row['descriptionArticle'] . "\n";
+    }
+    ?>
 </body>
 </html>
