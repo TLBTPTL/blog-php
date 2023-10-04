@@ -8,6 +8,7 @@
 </head>
 
     <?php
+        session_start();
         include_once('header.php');
     ?>
 <body> 
@@ -16,11 +17,24 @@
         <label for="titre">Titre de l'article :</label>
         <input type="text" id="titre" name="titre" required><br><br>
 
-        <label for="nb_categories">Nombre de Catégories :</label>
-        <input type="number" id="nb_categories" name="nb_categories" min="1" max="3" required><br><br>
+        <label for="categorie">Sélectionner catégorie(s) :</label>';
+        <select id="categorie" name="categorie">';
+        <option value="Film">Film</option>';
+        <option value="Jeu vidéo">Jeu vidéo</option>';
+        <option value="Série">Série</option>';
+        <option value="Musique">Musique</option>';
+        <option value="Histoire">Histoire</option>';
+        <option value="Littérature">Littérature</option>';
+        <option value="Philosophie">Philosophie</option>';
+            echo '<option value="Politique">Politique</option>';
+            echo '</select>';
+            echo "<textarea placeholder='Entrez votre texte' id='text' name='text' rows='10' cols='70'></textarea>";
+        <br>
+        <input type="submit" value="Soumettre">
 
         <input type="submit" value="Entrer dans la personnalisation de l'article">
     </form>
+    
 
     <?php
         include_once("footer.php");

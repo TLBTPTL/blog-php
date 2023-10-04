@@ -15,7 +15,12 @@
             }
         }
         $_SESSION['contenu']=$_POST['text'];
+
+
+        $sql = mysql_query("INSERT INTO article (idArticle, titreArticle, descriptionArticle, categorieArticle, pseudo, commentaires) VALUES (null, '{$_SESSION['titre']}', '{$_SESSION['contenu']}', '{$_SESSION['categorie']}', '{$_SESSION['pseudo']}', null)");
+
     }
+
 
 
     ?>

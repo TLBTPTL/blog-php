@@ -16,8 +16,7 @@
         $_SESSION['titre']=$_POST['titre'];
 
         echo '<label for="categorie">Sélectionner catégorie(s) :</label>';
-        for ($i = 0; $i < $_POST['nb_categories']; $i++) {
-            echo '<select id="'.$i.'categorie" name="'.$i.'categorie">';
+        echo '<select id="categorie" name="categorie">';
             echo '<option value="Film">Film</option>';
             echo '<option value="Jeu vidéo">Jeu vidéo</option>';
             echo '<option value="Série">Série</option>';
@@ -27,7 +26,7 @@
             echo '<option value="Philosophie">Philosophie</option>';
             echo '<option value="Politique">Politique</option>';
             echo '</select>';
-        }
+
 
             echo "<textarea placeholder='Entrez votre texte' id='text' name='text' rows='10' cols='70'></textarea>";
         ?>
