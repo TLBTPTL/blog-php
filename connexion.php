@@ -9,29 +9,24 @@
 <body>
 
     <?php
-        session_destroy();
         session_start();
     ?>
 
-    <form method="post" action="index.html">
+    <form method="post" action="traitementconnexion.php">
     <div class="box">
     <h1>Formulaire Connexion</h1>
 
         <input type="email" name="email" placeholder="Email"  class="email" />
-        <input type="pseudo" name="pseudo" placeholder="Pseudo"  class="email" />
+        <input type="text" name="pseudo" placeholder="Pseudo"  class="email" />
         <input type="password" name="password" placeholder="Mot De Passe"   class="email" />
     
-    <a href="index.html"><div class="btn"><button type="submit">Se connecter</button></a></div>
+        <div class="btn">
+            <button type="submit" name="connexion">Se connecter</button>
+            <button type="submit" name="nouveau_compte">Créer un nouveau compte</button>
+        </div>
     
     </div>  
     </form>
 
-    <?php
-        $_SESSION['pseudo']=$_POST['pseudo'];
-        $_SESSION['email']=$_POST['email'];
-        $_SESSION['password']=$_POST['password'];
-    ?>
-
-    <p>Mot de passe oublié? <a href="http://x.com" style="color:#f1c40f;">Cliquez ici !</a></p>
 </body>
 </html>
