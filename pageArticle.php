@@ -13,23 +13,52 @@
     <title>Page Article - Blog</title>
 </head>
 <body>
-<?php
-
-    $sql = "SELECT titreArticle, descriptionArticle, categorieArticle, pseudo FROM article";
-    $stmt = $connexion->query($sql);
-    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-    foreach ($articles as $article) {
-        echo "<h2>{$article['titreArticle']}</h2>";
-        echo "<p><strong>Catégorie:</strong> {$article['categorieArticle']}</p>";
-        echo "<p><strong>Auteur:</strong> {$article['pseudo']}</p>";
-        // Vous pouvez afficher une partie du contenu ici si vous le souhaitez
-        echo "<p>{$article['descriptionArticle']}</p>";
-        //echo "<a href='article_detail.php?id={$article['idArticle']}' class='btn btn-primary'>Lire la suite</a>";
-}
-
-
-?>
+    <?php 
+        $a = [1];
+        $dbh = connectToDatabase();
+        $stmt = $dbh->prepare("SELECT * FROM article INNER JOIN categorie ON article.idCategorie = categorie.idCategorie INNER JOIN compte ON article.idCompte = compte.idCompte WHERE article.idArticle = ?");
+        //$stmt = $dbh->prepare("SELECT * FROM article WHERE idArticle = ?");
+        $stmt->execute($a);
+        foreach ($stmt as $row){
+            print_r($row);
+            $titreArticle = $row['a.titreArticle'];
+            $categorieArticle = $row['c.nomCategorie'];
+            $pseudoArticle = $row['p.pseudoCompte'];
+            $descriptionArticle = $row['a.descriptionArticle'];
+        }
+    ?> 
+    <div id="Article">
+        <div id="headArticle">
+            <div id="titreArticle">
+                <?php 
+                    echo($titreArticle);
+                ?>
+            </div>
+            <div id="categorieArticle">
+                <?php
+                    echo($categorieArticle);
+                ?>
+            </div>
+            <div id="pseudoArticle">
+                <?php
+                    echo($pseudoArticle);
+                ?>
+            </div>
+        </div>
+        <div id="descriptionArticle">
+            <?php
+                echo($descriptionArticle);
+            ?>
+        </div>
+    </div>
+    <div id="Commentaires"> 
+        <?php 
+            $stmt = $dbh->prepare("SELECT * FROM article WHERE idCommentaires  = ?");
+            $stmt->execute();
+            foreach ($stmt as $row){
+                print_r($row);
+            }
+        ?> 
+    </div>
 </body>
 </html>
