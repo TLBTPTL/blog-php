@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 -- Base de données : `blogandregirardsauvaget`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `article`
+--
+
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE IF NOT EXISTS `article` (
+  `idArticle` int NOT NULL,
+  `titreArticle` varchar(100) NOT NULL,
+  `descriptionArticle` varchar(100) NOT NULL,
+  `categorieArticle` varchar(100) NOT NULL,
+  `pseudo` varchar(100) NOT NULL,
+  `Commentaires` varchar(100) NOT NULL,
+  PRIMARY KEY (`idArticle`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Liste des articles créés';
+
+--
+-- Déchargement des données de la table `article`
+--
+
+INSERT INTO `article` (`idArticle`, `titreArticle`, `descriptionArticle`, `categorieArticle`, `pseudo`, `Commentaires`) VALUES
+(1, 'premier article', 'Ceci est mon premier article, il parle de plantes', 'testCategorie', 'testPseudo', 'testCommentaire');
 
 -- --------------------------------------------------------
 
@@ -30,11 +53,24 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
-  `idCategorie` int NOT NULL,
+  `idCatergorie` int NOT NULL,
   `nomCategorie` varchar(100) NOT NULL,
-  PRIMARY KEY (`idCategorie`)
+  `articles` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Liste des catégories disponibles';
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaire`
+--
+
+DROP TABLE IF EXISTS `commentaire`;
+CREATE TABLE IF NOT EXISTS `commentaire` (
+  `idCom` int NOT NULL,
+  `descriptionCom` varchar(100) NOT NULL,
+  `article` varchar(100) NOT NULL,
+  `pseudoArt` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Liste des commentaires entrés';
 
 -- --------------------------------------------------------
 
@@ -47,49 +83,8 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `idCompte` int NOT NULL,
   `email` varchar(100) NOT NULL,
   `motDePasse` varchar(100) NOT NULL,
-  `pseudoCompte` varchar(100) NOT NULL,
-  PRIMARY KEY (`idCompte`)
+  `pseudoCompte` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
--- --------------------------------------------------------
-
---
--- Structure de la table `article`
---
-
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE IF NOT EXISTS `article` (
-  `idArticle` int NOT NULL,
-  `titreArticle` varchar(100) NOT NULL,
-  `descriptionArticle` varchar(100) NOT NULL,
-  `idCategorie` int NOT NULL,
-  `idCompte` int NOT NULL,
-  PRIMARY KEY (`idArticle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Liste des articles créés';
-
---
--- Déchargement des données de la table `article`
---
-
-INSERT INTO `article` (`idArticle`, `titreArticle`, `descriptionArticle`, `idCategorie`, `idCompte`) VALUES
-(1, 'premier article', 'Ceci est mon premier article, il parle de plantes', '1', '1');
-
-
--- --------------------------------------------------------
-
---
--- Structure de la table `commentaire`
---
-
-DROP TABLE IF EXISTS `commentaire`;
-CREATE TABLE IF NOT EXISTS `commentaire` (
-  `idCom` int NOT NULL,
-  `descriptionCom` varchar(100) NOT NULL,
-  `idArticle` int NOT NULL,
-  `pseudoArt` varchar(100) NOT NULL,
-  PRIMARY KEY (`idCom`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Liste des commentaires entrés';
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,7 +1,8 @@
 <?php
-    require_once('header.php');
-    /*require_once('Aricle.php');*/
-    require_once('functionDataBase.php');
+    include 'header.php';
+    include 'Article.php';
+    include_once 'functionDataBase.php';
+    $connexion = connectToDatabase();
 ?>
 
 <!DOCTYPE html>
@@ -12,50 +13,23 @@
     <title>Page Article - Blog</title>
 </head>
 <body>
-    <?php 
-        $a = [1];
-        $dbh = connectToDatabase();
-        $stmt = $dbh->prepare("SELECT * FROM article WHERE idArticle = ?");
-        $stmt->execute($a);
-        foreach ($stmt as $row){
-            $titreArticle = $row['titreArticle'];
-            $categorieArticle = $row['categorieArticle'];
-            $pseudoArticle = $row['pseudo'];
-            $descriptionArticle = $row['descriptionArticle'];
-        }
-    ?> 
-    <div id="Article">
-        <div id="headArticle">
-            <div id="titreArticle">
-                <?php 
-                    echo($titreArticle);
-                ?>
-            </div>
-            <div id="categorieArticle">
-                <?php
-                    echo($categorieArticle);
-                ?>
-            </div>
-            <div id="pseudoArticle">
-                <?php
-                    echo($pseudoArticle);
-                ?>
-            </div>
-        </div>
-        <div id="descriptionArticle">
-            <?php
-                echo($descriptionArticle);
-            ?>
-        </div>
-    </div>
-    <div id="Commentaires"> 
-        <?php 
-            $stmt = $dbh->prepare("SELECT * FROM article WHERE idCommentaires  = ?");
-            $stmt->execute();
-            foreach ($stmt as $row){
-                print_r($row);
-            }
-        ?> 
-    </div>
+<?php
+
+    $sql = "SELECT titreArticle, descriptionArticle, categorieArticle, pseudo FROM article";
+    $stmt = $connexion->query($sql);
+    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    foreach ($articles as $article) {
+        echo "<h2>{$article['titreArticle']}</h2>";
+        echo "<p><strong>Catégorie:</strong> {$article['categorieArticle']}</p>";
+        echo "<p><strong>Auteur:</strong> {$article['pseudo']}</p>";
+        // Vous pouvez afficher une partie du contenu ici si vous le souhaitez
+        echo "<p>{$article['descriptionArticle']}</p>";
+        //echo "<a href='article_detail.php?id={$article['idArticle']}' class='btn btn-primary'>Lire la suite</a>";
+}
+
+
+?>
 </body>
 </html>

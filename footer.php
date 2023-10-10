@@ -27,7 +27,7 @@
 <body>
 
     <footer>
-        2023 Jérémy Girard - Tous droits réservés.
+        2023 | Jérémy Girard (et pas les autres) - Tous droits réservés.
     </footer>
 </body>
 </html>
