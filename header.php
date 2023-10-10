@@ -15,6 +15,9 @@
             background-color: #333;
             color: white;
             padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
@@ -35,6 +38,18 @@
         nav ul li a {
             text-decoration: none;
             color: white;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info p {
+            margin: 0;
+            color: #FFA500;
+            font-weight: bold;
+            margin-left: 10px;
         }
 
         footer {
@@ -58,4 +73,11 @@
                 <li><a href="apropos.php">À propos</a></li>
             </ul>
         </nav>
+        <?php
+        session_start();
+        if (isset($_SESSION['pseudo'])) {
+            echo '<div class="user-info"><p>Connecté en tant que ' . htmlspecialchars($_SESSION['pseudo']) . '</p></div>';
+        }
+        ?>
     </header>
+    </head>
