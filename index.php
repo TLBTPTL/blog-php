@@ -53,7 +53,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
     </form>
 
     <?php foreach ($articles as $article) : ?>
-        <a href='article.php?id=<?= $article['idArticle'] ?>' class='article'>
+        <a href='pageArticle.php?id=<?= $article['idArticle'] ?>' class='article'>
             <h2><?= $article['titreArticle'] ?></h2>
             <p><strong>Catégorie :</strong> <?= $article['categorieArticle'] ?></p>
             <p><strong>Auteur :</strong> <?= $article['pseudo'] ?></p>
