@@ -4,6 +4,16 @@ include_once 'functionDataBase.php';
 
 $connexion = connectToDatabase();
 
+
+$sql = "INSERT INTO compte (idCompte, email, motDePasse, pseudoCompte) 
+                VALUES (0, 'admin@localhost.fr', 'admin69IUT', 'admin')";
+
+$stmt = $connexion->prepare($sql);
+$stmt->bindParam(':id', $idsuiv, PDO::PARAM_INT);
+$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+$stmt->bindParam(':motDePasse', $motDePasse, PDO::PARAM_STR);
+$stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+
 if (isset($_POST['connexion'])) {
     $email = $_POST['email'];
     $motDePasse = $_POST['password'];
