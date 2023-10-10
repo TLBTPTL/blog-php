@@ -53,6 +53,10 @@
             font-size: 16px;
         }
 
+        .btn-connexion:hover {
+            background-color: #0C7D7E;
+        }
+
         .btn-deconnexion {
             background-color: #FFA500;
         }
