@@ -63,16 +63,19 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Blogophilie</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
-                <li><a href="creationarticle.php">Créer Article</a></li>
-                <li><a href="apropos.php">À propos</a></li>
+<header style="background-color: #333; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+    <img src="images/logo.png" alt="Logo de Blogophilie" width="150" height="124">
+    <div>
+        <h1 style="margin-left: 80px; font-size: 24px;">Blogophilie</h1>
+        <nav style="margin-top: 10px; margin-left: 80px;">
+            <ul style="list-style: none; padding: 0; display: flex;">
+                <li style="margin-right: 20px;"><a href="index.php" style="text-decoration: none; color: white;">Accueil</a></li>
+                <li style="margin-right: 20px;"><a href="connexion.php" style="text-decoration: none; color: white;">Connexion</a></li>
+                <li style="margin-right: 20px;"><a href="creationarticle.php" style="text-decoration: none; color: white;">Créer Article</a></li>
+                <li><a href="apropos.php" style="text-decoration: none; color: white;">À propos</a></li>
             </ul>
         </nav>
+    </div>
         <?php
         session_start();
         if (isset($_SESSION['pseudo'])) {
