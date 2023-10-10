@@ -1,7 +1,8 @@
 <?php
 session_start();
+include_once 'functionDataBase.php';
 
-
+$connexion = connectToDatabase();
 
 if (isset($_POST['connexion'])) {
 $email = $_POST['email'];

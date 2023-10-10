@@ -10,6 +10,8 @@
 
     <?php
         session_start();
+        include_once 'functionDataBase.php';
+
     ?>
 
     <form method="post" action="traitementconnexion.php">
