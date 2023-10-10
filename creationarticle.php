@@ -1,6 +1,4 @@
-<?php
-include_once 'header.php';
-?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,7 +12,7 @@ include_once 'header.php';
 
     <div class="container">
         <h1>Création d'article</h1>
-        <form action="redactionArticle" method="post">
+        <form action="traitementarticle.php" method="post">
             <label for="titre">Titre de l'article </label>
             <input type="text" id="titre" name="titre" required><br><br>
 

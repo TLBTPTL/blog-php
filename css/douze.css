@@ -47,3 +47,21 @@ h1 {
 .btn button:hover {
   background: #3498db;
 }
+
+
+.articles {
+  background: #2980b9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.articles:hover {
+  background: #3498db;
+}
+

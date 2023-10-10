@@ -4,3 +4,25 @@ body{
     background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
     font-family: Poppins, sans-serif;
 }
+
+.article-link {
+    background: white;
+    width: 300px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin: 10px; /* Ajoutez de l'espacement entre chaque lien */
+}
+
+.article-link h1 {
+    font-size: 1.5em;
+    color: #525252;
+}
+.article-link {
+    border: 2px solid #000; /* Définissez la largeur et la couleur de la bordure /
+    display: inline-block; / Assurez-vous que la div s'adapte autour du texte /
+    text-decoration: none; / Supprimez le soulignement du lien /
+    color: #000; / Couleur du texte /
+    font-weight: bold; / Mettez en gras le texte si nécessaire */
+}
