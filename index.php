@@ -1,22 +1,24 @@
+<?php
+    include_once 'header.php';
+    $connexion = connectToDatabase();
+?>
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste Article - Blog</title>
 </head>
-
-<?php
-        include_once('header.php');
-    ?>
-<body> 
-    
-        
-
-
+<body>  
+    <h1>Bienvenue sur Le Blog d'Irene</h1>
     <?php
-        include_once("footer.php");
+    $sql =  'SELECT titreArticle, descriptionArticle, idArticle FROM article WHERE idArticle = 1';
+    foreach  ($connexion->query($sql) as $row) {
+        print 'L\'article numero '. $row['idArticle'] . "\t";
+        print 'est intitulé ' . $row['titreArticle'] . "\t";
+        print 'est contient ' . $row['descriptionArticle'] . "\n";
+    }
     ?>
 </body>
 </html>
