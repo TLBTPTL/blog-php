@@ -2,7 +2,7 @@
 
     function connectToDatabase() {
         try {
-            $connexion = new PDO("mysql:host=localhost;dbname=blogandregirardsauvaget", 'root', 'admin69IUT');
+            $connexion = new PDO("mysql:host=localhost;dbname=blogandregirardsauvaget", 'root', NULL);
             $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $connexion;
         } catch (PDOException $e) {

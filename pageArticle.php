@@ -15,13 +15,15 @@
     <?php 
         $a = [1];
         $dbh = connectToDatabase();
-        $stmt = $dbh->prepare("SELECT * FROM article WHERE idArticle = ?");
+        $stmt = $dbh->prepare("SELECT * FROM article INNER JOIN categorie ON article.idCategorie = categorie.idCategorie INNER JOIN compte ON article.idCompte = compte.idCompte WHERE article.idArticle = ?");
+        //$stmt = $dbh->prepare("SELECT * FROM article WHERE idArticle = ?");
         $stmt->execute($a);
         foreach ($stmt as $row){
-            $titreArticle = $row['titreArticle'];
-            $categorieArticle = $row['categorieArticle'];
-            $pseudoArticle = $row['pseudo'];
-            $descriptionArticle = $row['descriptionArticle'];
+            print_r($row);
+            $titreArticle = $row['a.titreArticle'];
+            $categorieArticle = $row['c.nomCategorie'];
+            $pseudoArticle = $row['p.pseudoCompte'];
+            $descriptionArticle = $row['a.descriptionArticle'];
         }
     ?> 
     <div id="Article">
