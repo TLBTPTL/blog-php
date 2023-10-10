@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Ouais le css en html évite de faire des fichiers en plus -->
+    <link rel="icon" type="image/png" href="images/logo.png">
     <title>Blogophilie - Jérémy Girard</title>
     <style>
         body {
@@ -15,19 +15,19 @@
             background-color: #333;
             color: white;
             padding: 20px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
         }
 
         header h1 {
             margin: 0;
             font-size: 24px;
+            text-align: center;
         }
 
         nav ul {
             list-style: none;
             padding: 0;
+            text-align: center;
         }
 
         nav ul li {
@@ -40,16 +40,36 @@
             color: white;
         }
 
+        .btn-connexion, .btn-deconnexion {
+            background-color: #14B7B8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: Poppins, sans-serif;
+            font-size: 16px;
+        }
+
+        .btn-deconnexion {
+            background-color: #FFA500;
+        }
+
+        .btn-deconnexion:hover {
+            background-color: #FF8500;
+        }
+
         .user-info {
-            display: flex;
-            align-items: center;
+            text-align: center;
+            margin-top: 10px;
         }
 
         .user-info p {
             margin: 0;
             color: #FFA500;
             font-weight: bold;
-            margin-left: 10px;
         }
 
         footer {
@@ -91,7 +111,8 @@
                 exit;
             }
         }
-        ?>
-
-    </header>
-    </head>
+    }
+    ?>
+</header>
+</body>
+</html>
