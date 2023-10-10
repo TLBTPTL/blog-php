@@ -2,6 +2,7 @@
 include_once 'header.php';
 include_once 'functionDataBase.php';
 $connexion = connectToDatabase();
+$_SESSION['erreurconnexion']=0;
 ?>
 
 <!DOCTYPE html>
