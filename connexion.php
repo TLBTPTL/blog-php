@@ -11,8 +11,8 @@
     <?php
         session_start();
         include_once 'functionDataBase.php';
-
     ?>
+
 
     <form method="post" action="traitementconnexion.php">
     <div class="box">
@@ -25,10 +25,17 @@
         <div class="btn">
             <button type="submit" name="connexion">Se connecter</button>
             <button type="submit" name="nouveau_compte">Créer un nouveau compte</button>
+
         </div>
-    
+        <?php
+        if ($_SESSION['erreurconnexion'] == 1){
+            echo "<p style='color: red'>Ce compte n'existe pas</p>";
+        }
+        ?>
+
     </div>  
     </form>
+
 
 </body>
 </html>

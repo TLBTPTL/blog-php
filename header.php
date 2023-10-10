@@ -80,7 +80,20 @@
         session_start();
         if (isset($_SESSION['pseudo'])) {
             echo '<div class="user-info"><p>Connecté en tant que ' . htmlspecialchars($_SESSION['pseudo']) . '</p></div>';
+            echo '<form method="post" action="">';
+            echo '<input type="submit" name="deconnexion" value="Déconnexion">';
+            echo '</form>';
+
+            if (isset($_POST['deconnexion'])) {
+                // Détruisez la session actuelle
+                session_unset();
+
+                // Redirigez l'utilisateur vers la page de connexion (ou une autre page de votre choix)
+                header('Location: index.php');
+                exit;
+            }
         }
         ?>
+
     </header>
     </head>
