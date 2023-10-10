@@ -45,8 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->closeCursor();
 
-// ...
-
 
         header('Location: index.php');
         exit;

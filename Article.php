@@ -126,6 +126,5 @@ class Article {
         }
 
 
-        // Autres méthodes d'accès aux propriétés (getters et setters) peuvent être ajoutées si nécessaire.
     }
 ?>
