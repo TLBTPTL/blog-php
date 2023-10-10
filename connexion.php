@@ -1,7 +1,3 @@
-<?php
-include_once 'header.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

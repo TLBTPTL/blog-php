@@ -6,10 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $categorie = $_POST['categorie'];
     $contenu = $_POST['text'];
 
-    $host = "hostname"; // Remplacez par votre hôte de base de données
-    $dbname = "database_name"; // Remplacez par le nom de votre base de données
-    $username = "username"; // Remplacez par votre nom d'utilisateur de la base de données
-    $password = "password"; // Remplacez par votre mot de passe de la base de données
+    $host = "hostname";
+    $dbname = "database_name";
+    $username = "username";
+    $password = "password";
 
     try {
         $connexion = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
