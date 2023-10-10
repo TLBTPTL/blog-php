@@ -113,7 +113,7 @@
                 exit;
             }
         }
-    }
+
     ?>
 </header>
 </body>
