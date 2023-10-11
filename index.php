@@ -28,6 +28,8 @@ if (isset($_GET['categorie'])) {
 $sql = "SELECT DISTINCT categorieArticle FROM article";
 $stmt = $connexion->query($sql);
 $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +60,16 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             <p><strong>Catégorie :</strong> <?= $article['categorieArticle'] ?></p>
             <p><strong>Auteur :</strong> <?= $article['pseudo'] ?></p>
             <p><?= $article['descriptionArticle'] ?></p>
-            <?php if (isset($_SESSION['pseudo']) && $article['pseudo'] === $_SESSION['pseudo'] ) : ?>
-                <form method="get" action="suppressionarticle.php">
+
+            <?php if (isset($_SESSION['pseudo'])) : ?>
+                <?php if ($article['pseudo'] === $_SESSION['pseudo'] || $_SESSION['pseudo'] == 'admin') :?>
+                <form method="post" action="suppressionarticle.php">
                     <input type="hidden" name="id" value="<?= $article['idArticle'] ?>">
                     <button type="submit" class="supprimer-button">Supprimer</button>
                 </form>
+                <?php endif;?>
             <?php endif; ?>
+
         </a>
     <?php endforeach; ?>
 </body>

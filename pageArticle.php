@@ -83,35 +83,38 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     </div>
     <?php } ?>
 
-    <div id="Commentaires"> 
+    <div id="Commentaires">
+
+
         <?php 
             $stmtCommentaires = $connexion->prepare("SELECT descriptionCom, pseudoArt FROM commentaire WHERE article = :idArticle");
             $stmtCommentaires->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
             $stmtCommentaires->execute();
 
-            if ($stmtCommentaires->rowCount() > 0) {
-                $commentaires = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($commentaires as $commentaire) {
-                    $stmtUtilisateur = $connexion->prepare("SELECT pseudoCompte FROM compte WHERE idCompte = :idCompte");
-                    $stmtUtilisateur->bindParam(':idCompte', $commentaire['pseudoArt'], PDO::PARAM_INT);
-                    $stmtUtilisateur->execute();
+        if ($stmtCommentaires->rowCount() > 0) {
+            $commentaires = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($commentaires as $commentaire) {
+                $auteurCommentaire = "Auteur inconnu";
 
-                    if ($stmtUtilisateur->rowCount() > 0) {
-                        $row = $stmtUtilisateur->fetch(PDO::FETCH_ASSOC);
-                        $auteurCommentaire = $row['pseudoCompte'];
-                    } else {
-                        $auteurCommentaire = "Auteur inconnu";
-                    }
-
-                    echo '<div class="commentaire">';
-                    echo '<p><strong>Par ' . $auteurCommentaire . '</strong></p>';
-                    echo '<p>' . $commentaire['descriptionCom'] . '</p>';
-                    echo '</div>';
+                if (isset($_SESSION['pseudo']) && $commentaire['pseudoArt'] == $_SESSION['']) {
+                    $auteurCommentaire = $_SESSION['pseudo'];
                 }
-            } else {
-                echo "Aucun commentaire pour cet article.";
+
+                echo '<div class="commentaire">';
+                echo '<p><strong>Par ' . $auteurCommentaire . '</strong></p>';
+                echo '<p>' . $commentaire['descriptionCom'] . '</p>';?>
+                <form method="post" action="suppressioncommentaire.php">
+                    <input type="hidden" name="id" value="<?=$idArticle?>">
+                    <button type="submit" class="supprimer-button">Supprimer</button>
+                </form>
+                <?php
+                echo '</div>';
             }
-        ?> 
+        } else {
+            echo "Aucun commentaire pour cet article.";
+        }
+
+        ?>
     </div>
 
 

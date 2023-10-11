@@ -45,6 +45,8 @@ $sql = "SELECT COUNT(*) AS compte_existe
             AND motDePasse = :motDePasse
             AND pseudoCompte = :pseudo";
 
+
+
 $stmt = $connexion->prepare($sql);
 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt->bindParam(':motDePasse', $motDePasse, PDO::PARAM_STR);

@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $resultCount->fetch(PDO::FETCH_ASSOC);
         $nb_lignes = $row['rowcount'];
 
-        // ...
 
         if ($nb_lignes == 0) {
             $sql = "INSERT INTO article (idArticle, titreArticle, descriptionArticle, categorieArticle, pseudo, commentaires) VALUES (1, ?, ?, ?, ?, 0)";
@@ -45,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->closeCursor();
 
-// ...
 
 
         header('Location: index.php');
