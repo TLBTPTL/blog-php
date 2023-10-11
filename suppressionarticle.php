@@ -13,14 +13,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            if (isset($_SESSION['pseudo']) && ($_SESSION['pseudo'] === $result['pseudo'] || $_SESSION['pseudo'] === 'admin')) {
-                $sql = "DELETE FROM article WHERE idArticle = :articleId";
-                $stmt = $connexion->prepare($sql);
-                $stmt->bindParam(':articleId', $articleId, PDO::PARAM_INT);
-                $stmt->execute();
+            if (isset($_SESSION['pseudo'])){
+                if ($_SESSION['pseudo'] == $result['pseudo'] || $_SESSION['pseudo'] == 'admin') {
+                    $sql = "DELETE FROM article WHERE idArticle = :articleId";
+                    $stmt = $connexion->prepare($sql);
+                    $stmt->bindParam(':articleId', $articleId, PDO::PARAM_INT);
+                    $stmt->execute();
 
-                header('Location: index.php');
-                exit;
+                    header('Location: index.php');
+                    exit;
+                }
             } else {
                 echo "Vous n'êtes pas autorisé à supprimer cet article.";
             }

@@ -3,7 +3,7 @@ include 'header.php';
 include_once 'functionDataBase.php';
 $connexion = connectToDatabase();
 
-// Vérifie si l'ID de l'article est passé en tant que paramètre dans l'URL
+
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $idArticle = $_GET['id'];
 
@@ -37,40 +37,40 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <title>Page Article - Blog</title>
 </head>
 <body>
-    <div id="Article">
-        <?php if (isset($titreArticle)) : ?>
-            <div id="headArticle">
-                <div id="titreArticle">
-                    <?php echo $titreArticle; ?>
-                </div>
-                <div id="categorieArticle">
-                    <?php if (isset($categorieArticle)) : ?>
-                        <?php echo $categorieArticle; ?>
-                    <?php else : ?>
-                        Categorie non définie
-                    <?php endif; ?>
-                </div>
-                <div id="pseudoArticle">
-                    <?php if (isset($pseudoArticle)) : ?>
-                        <?php echo $pseudoArticle; ?>
-                    <?php else : ?>
-                        Auteur non défini
-                    <?php endif; ?>
-                </div>
+<div id="Article">
+    <?php if (isset($titreArticle)) : ?>
+        <div id="headArticle">
+            <div id="titreArticle">
+                <?php echo $titreArticle; ?>
             </div>
-            <div id="descriptionArticle">
-                <?php if (isset($descriptionArticle)) : ?>
-                    <?php echo $descriptionArticle; ?>
+            <div id="categorieArticle">
+                <?php if (isset($categorieArticle)) : ?>
+                    <?php echo $categorieArticle; ?>
                 <?php else : ?>
-                    Description non définie
+                    Categorie non définie
                 <?php endif; ?>
             </div>
-        <?php else : ?>
-            <p>L'article demandé n'a pas été trouvé.</p>
-        <?php endif; ?>
-    </div>
+            <div id="pseudoArticle">
+                <?php if (isset($pseudoArticle)) : ?>
+                    <?php echo $pseudoArticle; ?>
+                <?php else : ?>
+                    Auteur non défini
+                <?php endif; ?>
+            </div>
+        </div>
+        <div id="descriptionArticle">
+            <?php if (isset($descriptionArticle)) : ?>
+                <?php echo $descriptionArticle; ?>
+            <?php else : ?>
+                Description non définie
+            <?php endif; ?>
+        </div>
+    <?php else : ?>
+        <p>L'article demandé n'a pas été trouvé.</p>
+    <?php endif; ?>
+</div>
 
-    <?php if(isset($_SESSION['pseudo'])){?>
+<?php if (isset($_SESSION['pseudo'])) : ?>
 
     <div id="AjouterCommentaire">
         <h2>Ajouter un commentaire</h2>
@@ -81,42 +81,38 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <button type="submit">Ajouter le commentaire</button>
         </form>
     </div>
-    <?php } ?>
+<?php endif; ?>
 
-    <div id="Commentaires">
+<div id="Commentaires">
+    <?php
+    $stmtCommentaires = $connexion->prepare("SELECT descriptionCom, pseudoArt FROM commentaire WHERE article = :idArticle");
+    $stmtCommentaires->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
+    $stmtCommentaires->execute();
 
+    if ($stmtCommentaires->rowCount() > 0) {
+        $commentaires = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($commentaires as $commentaire) {
+            $auteurCommentaire = "Auteur inconnu";
 
-        <?php 
-            $stmtCommentaires = $connexion->prepare("SELECT descriptionCom, pseudoArt FROM commentaire WHERE article = :idArticle");
-            $stmtCommentaires->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
-            $stmtCommentaires->execute();
-
-        if ($stmtCommentaires->rowCount() > 0) {
-            $commentaires = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($commentaires as $commentaire) {
-                $auteurCommentaire = "Auteur inconnu";
-
-                if (isset($_SESSION['pseudo']) && $commentaire['pseudoArt'] == $_SESSION['']) {
-                    $auteurCommentaire = $_SESSION['pseudo'];
-                }
-
-                echo '<div class="commentaire">';
-                echo '<p><strong>Par ' . $auteurCommentaire . '</strong></p>';
-                echo '<p>' . $commentaire['descriptionCom'] . '</p>';?>
-                <form method="post" action="suppressioncommentaire.php">
-                    <input type="hidden" name="id" value="<?=$idArticle?>">
-                    <button type="submit" class="supprimer-button">Supprimer</button>
-                </form>
-                <?php
-                echo '</div>';
+            if (!empty($commentaire['pseudoArt'])) {
+                $auteurCommentaire = $commentaire['pseudoArt'];
             }
-        } else {
-            echo "Aucun commentaire pour cet article.";
+
+            echo '<div class="commentaire">';
+            echo '<p><strong>Par ' . $auteurCommentaire . '</strong></p>';
+            echo '<p>' . $commentaire['descriptionCom'] . '</p>';
+            ?>
+            <form method="post" action="suppressioncommentaire.php">
+                <input type="hidden" name="id" value="<?= $idArticle ?>">
+                <button type="submit" class="supprimer-button">Supprimer</button>
+            </form>
+            <?php
+            echo '</div>';
         }
-
-        ?>
-    </div>
-
-
+    } else {
+        echo "Aucun commentaire pour cet article.";
+    }
+    ?>
+</div>
 </body>
 </html>
