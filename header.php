@@ -87,37 +87,34 @@
     </style>
 </head>
 <body>
-<header style="background-color: #333; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
-    <img src="images/logo.png" alt="Logo de Blogophilie" width="150" height="124">
-    <div>
-        <h1 style="margin-left: 80px; font-size: 24px;">Blogophilie</h1>
-        <nav style="margin-top: 10px; margin-left: 80px;">
-            <ul style="list-style: none; padding: 0; display: flex;">
-                <li style="margin-right: 20px;"><a href="index.php" style="text-decoration: none; color: white;">Accueil</a></li>
-                <li style="margin-right: 20px;"><a href="connexion.php" style="text-decoration: none; color: white;">Connexion</a></li>
-                <li style="margin-right: 20px;"><a href="creationarticle.php" style="text-decoration: none; color: white;">Créer Article</a></li>
-                <li><a href="apropos.php" style="text-decoration: none; color: white;">À propos</a></li>
-            </ul>
-        </nav>
-    </div>
-        <?php
-        session_start();
-        if (isset($_SESSION['pseudo'])) {
-            echo '<div class="user-info"><p>Connecté en tant que ' . htmlspecialchars($_SESSION['pseudo']) . '</p></div>';
-            echo '<form method="post" action="">';
-            echo '<input type="submit" name="deconnexion" value="Déconnexion">';
-            echo '</form>';
-
-            if (isset($_POST['deconnexion'])) {
-                // Détruisez la session actuelle
-                session_unset();
-
-                // Redirigez l'utilisateur vers la page de connexion (ou une autre page de votre choix)
-                header('Location: index.php');
-                exit;
-            }
+<header>
+    <h1>Blogophilie</h1>
+    <nav>
+        <ul>
+            <li><a href="index.php" class="btn-connexion">Accueil</a></li>
+            <li><a href="connexion.php" class="btn-connexion">Connexion</a></li>
+            <li><a href="creationarticle.php" class="btn-connexion">Créer Article</a></li>
+            <li><a href="apropos.php" class="btn-connexion">À propos</a></li>
+        </ul>
+    </nav>
+    
+    <?php
+    session_start();
+    if (isset($_SESSION['pseudo'])) {
+        echo '<div class="user-info">';
+        echo '<div>';
+        echo '<p>Connecté en tant que ' . htmlspecialchars($_SESSION['pseudo']) . '</p>';
+        echo '</div>';
+        echo '<form method="post" action="">';
+        echo '<button type="submit" name="deconnexion" class="btn-deconnexion">Déconnexion</button>';
+        echo '</form>';
+        echo '</div>';
+        if (isset($_POST['deconnexion'])) {
+            session_unset();
+            header('Location: index.php');
+            exit;
         }
-
+    }
     ?>
 </header>
 </body>
