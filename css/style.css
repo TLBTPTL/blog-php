@@ -64,3 +64,9 @@ button {
 button:hover {
     background-color: #0C7D7E;
 }
+
+a{
+    outline: none;
+    text-decoration: none;
+    color: black;
+}

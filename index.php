@@ -53,18 +53,23 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
     </form>
 
     <?php foreach ($articles as $article) : ?>
-        <a href='pageArticle.php?id=<?= $article['idArticle'] ?>' class='article'>
-            <h2><?= $article['titreArticle'] ?></h2>
-            <p><strong>Catégorie :</strong> <?= $article['categorieArticle'] ?></p>
-            <p><strong>Auteur :</strong> <?= $article['pseudo'] ?></p>
-            <p><?= $article['descriptionArticle'] ?></p>
+        <div class="article">
+            <a href="article.php?id=<?= $article['idArticle'] ?>" class="article-link">
+                <h2><?= $article['titreArticle'] ?></h2>
+                <p><strong>Catégorie :</strong> <?= $article['categorieArticle'] ?></p>
+                <p><strong>Auteur :</strong> <?= $article['pseudo'] ?></p>
+                <p><?= $article['descriptionArticle'] ?></p>
+            </a>
+
+
             <?php if (isset($_SESSION['pseudo']) && $article['pseudo'] === $_SESSION['pseudo'] ) : ?>
                 <form method="get" action="suppressionarticle.php">
                     <input type="hidden" name="id" value="<?= $article['idArticle'] ?>">
                     <button type="submit" class="supprimer-button">Supprimer</button>
                 </form>
             <?php endif; ?>
-        </a>
+        </div>
     <?php endforeach; ?>
+
 </body>
 </html>
