@@ -58,6 +58,12 @@ $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             <p><strong>Catégorie :</strong> <?= $article['categorieArticle'] ?></p>
             <p><strong>Auteur :</strong> <?= $article['pseudo'] ?></p>
             <p><?= $article['descriptionArticle'] ?></p>
+            <?php if (isset($_SESSION['pseudo']) && $article['pseudo'] === $_SESSION['pseudo'] ) : ?>
+                <form method="get" action="suppressionarticle.php">
+                    <input type="hidden" name="id" value="<?= $article['idArticle'] ?>">
+                    <button type="submit" class="supprimer-button">Supprimer</button>
+                </form>
+            <?php endif; ?>
         </a>
     <?php endforeach; ?>
 </body>
