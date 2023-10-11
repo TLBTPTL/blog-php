@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
     try {
         $connexion = connectToDatabase();
-        $sql = "SELECT pseudoArt FROM commentaire WHERE idCom = :commentaireId";
+        $sql = "SELECT pseudoArt, article FROM commentaire WHERE idCom = :commentaireId";
         $stmt = $connexion->prepare($sql);
         $stmt->bindParam(':commentaireId', $commentaireId, PDO::PARAM_INT);
         $stmt->execute();
@@ -15,16 +15,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
         if ($result) {
             if (isset($_SESSION['pseudo'])) {
-                if ($_SESSION['pseudo'] == $result['pseudo'] || $_SESSION['pseudo'] == 'admin') {
-                    $sql = "DELETE FROM commentaire WHERE idCom = :commentaireId";
-                    $stmt = $connexion->prepare($sql);
-                    $stmt->bindParam(':commentaireId', $commentaireId, PDO::PARAM_INT);
-                    $stmt->execute();
+                if ($_SESSION['pseudo'] == $result['pseudoArt'] || $_SESSION['pseudo'] == 'admin') {
+                    $sqlDelete = "DELETE FROM commentaire WHERE idCom = :commentaireId";
+                    $stmtDelete = $connexion->prepare($sqlDelete);
+                    $stmtDelete->bindParam(':commentaireId', $commentaireId, PDO::PARAM_INT);
+                    $stmtDelete->execute();
+
+                    // Redirigez l'utilisateur vers la page de l'article après la suppression.
+                    header('Location: pageArticle.php?id=' . $result['article']);
+                    exit;
+                } else {
+                    echo "Vous n'êtes pas autorisé à supprimer ce commentaire.";
                 }
-                //header('Location: pageArticle.php?id=' . $['idArticle']);
-                exit;
             } else {
-                echo "Vous n'êtes pas autorisé à supprimer ce commentaire.";
+                echo "Vous devez être connecté pour supprimer un commentaire.";
             }
         } else {
             echo "Ce commentaire n'existe pas.";
@@ -36,4 +40,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     echo "ID du commentaire non spécifié.";
 }
 ?>
-<?php

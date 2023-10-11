@@ -28,7 +28,7 @@ body {
     margin: 0;
 }
 
-form[method="post"] {
+form[method="get"] {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
