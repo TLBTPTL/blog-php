@@ -7,11 +7,9 @@ $connexion = connectToDatabase();
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $idArticle = $_GET['id'];
 
-    // Requête pour récupérer les informations de l'article
     $stmt = $connexion->prepare("SELECT titreArticle, categorieArticle, pseudo, descriptionArticle
     FROM article
     WHERE idArticle = :idArticle");
-
 
     $stmt->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
     $stmt->execute();
@@ -71,22 +69,42 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <p>L'article demandé n'a pas été trouvé.</p>
         <?php endif; ?>
     </div>
+
+    <?php if(isset($_SESSION['pseudo'])){?>
+
+    <div id="AjouterCommentaire">
+        <h2>Ajouter un commentaire</h2>
+        <form method="post" action="traitementcommentaire.php">
+            <input type="hidden" name="idArticle" value="<?php echo $idArticle; ?>">
+            <label for="commentaire">Commentaire :</label>
+            <textarea name="commentaire" id="commentaire" rows="4" required></textarea>
+            <button type="submit">Ajouter le commentaire</button>
+        </form>
+    </div>
+    <?php } ?>
+
     <div id="Commentaires"> 
         <?php 
-            // Requête pour récupérer les commentaires de l'article
-            $stmt = $connexion->prepare("SELECT c.descriptionCom, p.pseudoCompte
-                FROM commentaire c
-                INNER JOIN compte p ON c.pseudoArt = p.idCompte
-                WHERE c.article = :idArticle");
+            $stmtCommentaires = $connexion->prepare("SELECT descriptionCom, pseudoArt FROM commentaire WHERE article = :idArticle");
+            $stmtCommentaires->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
+            $stmtCommentaires->execute();
 
-            $stmt->bindParam(':idArticle', $idArticle, PDO::PARAM_INT);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($stmtCommentaires->rowCount() > 0) {
+                $commentaires = $stmtCommentaires->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($commentaires as $commentaire) {
+                    $stmtUtilisateur = $connexion->prepare("SELECT pseudoCompte FROM compte WHERE idCompte = :idCompte");
+                    $stmtUtilisateur->bindParam(':idCompte', $commentaire['pseudoArt'], PDO::PARAM_INT);
+                    $stmtUtilisateur->execute();
+
+                    if ($stmtUtilisateur->rowCount() > 0) {
+                        $row = $stmtUtilisateur->fetch(PDO::FETCH_ASSOC);
+                        $auteurCommentaire = $row['pseudoCompte'];
+                    } else {
+                        $auteurCommentaire = "Auteur inconnu";
+                    }
+
                     echo '<div class="commentaire">';
-                    echo '<p><strong>Par ' . $commentaire['pseudoCompte'] . '</strong></p>';
+                    echo '<p><strong>Par ' . $auteurCommentaire . '</strong></p>';
                     echo '<p>' . $commentaire['descriptionCom'] . '</p>';
                     echo '</div>';
                 }
@@ -96,14 +114,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         ?> 
     </div>
 
-    <div id="AjouterCommentaire">
-        <h2>Ajouter un commentaire</h2>
-        <form method="post" action="ajouter_commentaire.php">
-            <input type="hidden" name="idArticle" value="<?php echo $idArticle; ?>">
-            <label for="commentaire">Commentaire :</label>
-            <textarea name="commentaire" id="commentaire" rows="4" required></textarea>
-            <button type="submit">Ajouter le commentaire</button>
-        </form>
-    </div>
+
 </body>
 </html>

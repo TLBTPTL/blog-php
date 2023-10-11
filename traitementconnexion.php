@@ -28,11 +28,11 @@ if (isset($_POST['connexion'])) {
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['pseudo'] = $_POST['pseudo'];
         header('Location: index.php');
-        exit; // Assurez-vous de quitter le script après la redirection
+        exit;
     } else {
         $_SESSION['erreurconnexion'] = 1;
         header('Location: connexion.php');
-        exit; // Assurez-vous de quitter le script après la redirection
+        exit;
     }
 } elseif (isset($_POST['nouveau_compte'])) {
 $email = $_POST['email'];
